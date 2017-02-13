@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/labelnombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_nombre"/>
+    <TextView
+        android:id="@+id/ctxtnombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelnombre"/>
+    <TextView
+        android:id="@+id/labelfecnac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_fechnac"
+        android:layout_below="@+id/ctxtnombre"/>
+    <TextView
+        android:id="@+id/cdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelfecnac"
+        />
+
+    <TextView
+        android:id="@+id/labeltelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_telefono"
+        android:layout_below="@+id/cdate"/>
+    <TextView
+        android:id="@+id/ctxttelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labeltelefono"/>
+    <TextView
+        android:id="@+id/labelemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_email"
+        android:layout_below="@+id/ctxttelefono"/>
+    <TextView
+        android:id="@+id/ctxtemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelemail"/>
+    <TextView
+        android:id="@+id/labeldescripction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_descripcion"
+        android:layout_below="@+id/ctxtemail"/>
+    <TextView
+        android:id="@+id/ctxtdescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labeldescripction"/>
+
+    <Button
+        android:text="Editar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttoneditar" />
+
+</LinearLayout>
