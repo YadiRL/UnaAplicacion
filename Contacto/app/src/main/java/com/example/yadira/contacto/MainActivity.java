@@ -1,42 +1,73 @@
 package com.example.yadira.contacto;
-
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.DatePicker;
+        import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Button.OnClickListener{
+
+    private Button btnSiguiente=null;
+    private EditText etxtNombre=null;
+    private DatePicker fechaNacimiento=null;
+    private EditText etxtTelefono=null;
+    private EditText etxtEmail=null;
+    private EditText etxtDescripcion=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button buttonAdd = (Button) findViewById(R.id.buttonguarda);
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ConfirmaContacto.class);
+        btnSiguiente= (Button)findViewById(R.id.button);
+        btnSiguiente.setOnClickListener(this);
+        etxtNombre= (EditText) findViewById(R.id.editText);
+        fechaNacimiento= (DatePicker) findViewById(R.id.datePicker);
+        etxtTelefono= (EditText) findViewById(R.id.editText2);
+        etxtEmail= (EditText) findViewById(R.id.editText3);
+        etxtDescripcion= (EditText) findViewById(R.id.editText4);
 
-                EditText editTextNombre = (EditText) findViewById(R.id.txtnombre);
-                EditText editTextFecha = (EditText) findViewById(R.id.txtnombre);
-                EditText editTextTelefono = (EditText) findViewById(R.id.txttelefono);
-                EditText editTextEmail = (EditText) findViewById(R.id.txtemail);
-                EditText editTextDescripcion = (EditText) findViewById(R.id.txtdescription);
-                String nombre = editTextNombre.getText().toString();
-                String fecha = editTextFecha.getText().toString();
-                String telefono = editTextTelefono.getText().toString();
-                String email = editTextEmail.getText().toString();
-                String descripcion = editTextDescripcion.getText().toString();
-                intent.putExtra("NOMBRE", nombre);
-                intent.putExtra("FECHA", fecha);
-                intent.putExtra("TELEFONO", telefono);
-                intent.putExtra("EMAIL", email);
-                intent.putExtra("DESCRIPCION", descripcion);
-                startActivity(intent);
+        etxtNombre.setText("Yadira");
+        fechaNacimiento.updateDate(2015,03,9);
+        etxtTelefono.setText("55555555");
+        etxtEmail.setText("yrl@yahoo.com");
+        etxtDescripcion.setText("testnew");
+
+        llenarEditText();
+    }
+
+    private void llenarEditText(){
+
+        Bundle parametros = getIntent().getExtras();
+
+        if(parametros!=null) {
+            String fechaNace = parametros.getString(getResources().getString(R.string.mA_Nacimiento));//fecha nacimiento
+            String nombre = parametros.getString(getResources().getString(R.string.mA_nombre));//nombre
+            String telefono = parametros.getString(getResources().getString(R.string.mA_Telefono));//Telefono
+            String email = parametros.getString(getResources().getString(R.string.mA_email));//Emai
+            String descripcion = parametros.getString(getResources().getString(R.string.mA_Descripcion));//Descripcion
+
+            if(fechaNace!=null) {
+                fechaNacimiento.updateDate(Integer.parseInt(fechaNace.split("/")[2]), Integer.parseInt(fechaNace.split("/")[1]), Integer.parseInt(fechaNace.split("/")[0]));
+                etxtNombre.setText(nombre);
+                etxtTelefono.setText(telefono);
+                etxtEmail.setText(email);
+                etxtDescripcion.setText(descripcion);
             }
-        });
+        }
+    }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, ContactosActivity.class);
+        intent.putExtra(getResources().getString(R.string.mA_nombre), etxtNombre.getText().toString());
+        intent.putExtra(getResources().getString(R.string.mA_Nacimiento), fechaNacimiento.getDayOfMonth()+"/"+fechaNacimiento.getMonth()+"/"+fechaNacimiento.getYear());
+        intent.putExtra(getResources().getString(R.string.mA_Telefono), etxtTelefono.getText().toString());
+        intent.putExtra(getResources().getString(R.string.mA_email), etxtEmail.getText().toString());
+        intent.putExtra(getResources().getString(R.string.mA_Descripcion), etxtDescripcion.getText().toString());
+        startActivity(intent);
+        finish();
     }
 }
